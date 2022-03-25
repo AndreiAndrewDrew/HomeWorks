@@ -2,6 +2,7 @@ package qa.homeWork2;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
@@ -12,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class CreateGroupTests {
   private WebDriver driver;
   private String baseUrl;
+
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
@@ -37,12 +39,25 @@ public class CreateGroupTests {
 
   @Test //inceput de test
   public void testGroupCreation() throws Exception {
-
+    //Create new group
     gotoGroupPage();
     initGroupCreation();
-    fillGroupForm(new GroupData("test111", "test2", "test3"));
+    fillGroupForm(new GroupData("NewGroupTest", "test2", "test3"));
     submitGroupCreation();
     returnGroupPage();
+    //Delete group
+    selectedGroup();
+    deleteGroup();
+    returnGroupPage();
+
+  }
+
+  private void deleteGroup() {
+    driver.findElement(By.name("delete")).click();
+  }
+
+  private void selectedGroup() {
+    driver.findElement(By.xpath("//div[@id='content']/form/span[4]/input")).click();
   }
 
   private void returnGroupPage() {
@@ -75,11 +90,16 @@ public class CreateGroupTests {
 
   @AfterClass(alwaysRun = true)
   public void tearDown() throws Exception {
+    logout();
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);
     }
+  }
+
+  private void logout() {
+    driver.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
