@@ -3,25 +3,20 @@ package qa.homeWork2.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SessionHelper {
-  private WebDriver driver;
+public class SessionHelper extends HelperBase {
 
   public SessionHelper(WebDriver driver) {
-    this.driver = driver;
+    super(driver);
   }
 
   public void login(String username, String password) {
-    driver.findElement(By.name("user")).click();
-    driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys(username);
-    driver.findElement(By.name("pass")).click();
-    driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys(password);
-    driver.findElement(By.id("LoginForm")).submit();
+    type(By.name("user"),username);
+    type(By.name("pass"),password);
+    clickbuton(By.name("Login"));
   }
 
   public void logout() {
-    driver.findElement(By.linkText("Logout")).click();
+    clickbuton(By.linkText("Logout"));
   }
 
 }
