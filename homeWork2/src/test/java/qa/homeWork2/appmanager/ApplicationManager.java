@@ -28,7 +28,7 @@ public class ApplicationManager {
   }
 
   public void init() {
-
+    //cream conditie de alegere a browserului
     if (browser == BrowserType.FIREFOX) {
       driver = new FirefoxDriver();
     } else if (browser==BrowserType.CHROME){
