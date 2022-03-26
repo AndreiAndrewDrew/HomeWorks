@@ -19,7 +19,7 @@ public class ApplicationManager {
 
   public void init() {
     driver = new FirefoxDriver();
-    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/");
 
     groupHelper = new GroupHelper(driver);
@@ -28,7 +28,6 @@ public class ApplicationManager {
 
     sessionHelper.login("admin", "secret");
   }
-
 
   public void stop() {
     sessionHelper.logout();
@@ -39,8 +38,6 @@ public class ApplicationManager {
       fail(verificationErrorString);
     }
   }
-
-
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
