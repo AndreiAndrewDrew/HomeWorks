@@ -7,7 +7,7 @@ import qa.homeWork2.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
