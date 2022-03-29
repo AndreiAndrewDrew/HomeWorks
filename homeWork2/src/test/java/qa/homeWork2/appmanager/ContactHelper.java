@@ -3,6 +3,7 @@ package qa.homeWork2.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import qa.homeWork2.model.ContactData;
 
 
@@ -20,11 +21,12 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.firstname());
     type(By.name("lastname"), contactData.lastname());
 
-
-
-    if (isElementPresent(By.name("new_group"))) {
+    if (creation){
       new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
+    }else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+
   }
 
   public void submitContactCreation() {
