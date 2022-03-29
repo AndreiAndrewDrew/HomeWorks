@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import qa.homeWork2.model.ContactData;
 
 public class ContactCreationTests extends TestBase {
-  @Test
+  @Test //ineceput de test
   public void testContactCreation() {
     app.getNavigationHelper().gotoHomePage();
     app.getContactHelper().initContactCreation();
