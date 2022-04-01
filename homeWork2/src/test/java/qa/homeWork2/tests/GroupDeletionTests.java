@@ -3,7 +3,7 @@ package qa.homeWork2.tests;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 
-public class DeletionGroupTests extends TestBase {
+public class GroupDeletionTests extends TestBase {
 
   @Test //inceput de test
   public void testGroupDeletion() {
