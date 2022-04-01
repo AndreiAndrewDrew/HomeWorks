@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import qa.homeWork2.model.ContactData;
+import qa.homeWork2.model.GroupData;
 
 
 public class ContactHelper extends HelperBase {
@@ -45,6 +46,17 @@ public class ContactHelper extends HelperBase {
     clickbuton(By.xpath("//img[@alt='Edit']"));
   }
 
+  public void createContact(ContactData contact, boolean b) {
+    initContactCreation();
+    fillContactForm(contact,b);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+
+  }
 }
 
 
