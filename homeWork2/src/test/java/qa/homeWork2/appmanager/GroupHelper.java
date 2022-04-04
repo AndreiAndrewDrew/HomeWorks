@@ -15,8 +15,8 @@ public class GroupHelper extends HelperBase {
     clickbuton(By.name("delete"));
   }
 
-  public void selectedGroup() {
-    clickbuton(By.name("selected[]"));
+  public void selectedGroup(int index) {
+    driver.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void returnGroupPage() {
