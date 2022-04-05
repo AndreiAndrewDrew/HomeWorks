@@ -24,7 +24,7 @@ public class GroupModificationTests extends TestBase {
     app.getGroupHelper().selectedGroup(beforeModification.size() - 1);
     app.getGroupHelper().initGroupModification();
     GroupData group = new GroupData(beforeModification.get(beforeModification.size() - 1).id()/*pastram id vechi de la grupa modificata*/
-            ,"TestModification3", "test2modificat", "test3modificat");
+            ,"TestModification1", "test2modificat", "test3modificat");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnGroupPage();
