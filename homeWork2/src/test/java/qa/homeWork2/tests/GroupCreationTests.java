@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -14,10 +15,25 @@ public class GroupCreationTests extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     //int before = app.getGroupHelper().getGroupCount();
     List<GroupData> beforeCreation = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().createGroup(new GroupData("Addnewtest44", null, null));
+    GroupData group = new GroupData("TestNewGroup", null, null);
+    app.getGroupHelper().createGroup(group);
     //int after = app.getGroupHelper().getGroupCount();
     List<GroupData> afterCreation = app.getGroupHelper().getGroupList();
     Assert.assertEquals(afterCreation.size(), beforeCreation.size() + 1);
+
+
+    int max=0;
+    for (GroupData g : afterCreation){
+      if (g.id()>max)
+      {
+        max = g.id();
+      }
+    }
+    group.setId(max);
+
+    beforeCreation.add(group);
+    Assert.assertEquals(new HashSet<Object>(afterCreation), new HashSet<Object>(beforeCreation));
+
   }
 }
 

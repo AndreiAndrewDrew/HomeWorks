@@ -16,27 +16,27 @@ public class GroupModificationTests extends TestBase {
 
     if (!app.getGroupHelper().isThereAGroup()) {
 
-      app.getGroupHelper().createGroup(new GroupData("AddnewtestGroup", null, null));
+      app.getGroupHelper().createGroup(new GroupData("TestNewGroup", null, null));
 
     }
     //int before = app.getGroupHelper().getGroupCount();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectedGroup(before.size() - 1);
+    List<GroupData> beforeModification = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectedGroup(beforeModification.size() - 1);
     app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size() - 1).id()/*pastram id vechi de la grupa modificata*/
-            ,"TestModification2", "test2modificat", "test3modificat");
+    GroupData group = new GroupData(beforeModification.get(beforeModification.size() - 1).id()/*pastram id vechi de la grupa modificata*/
+            ,"TestModification3", "test2modificat", "test3modificat");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnGroupPage();
     //int after = app.getGroupHelper().getGroupCount();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(after.size(), before.size());
+    List<GroupData> afterModification = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(afterModification.size(), beforeModification.size());//comparam marimea listelor
 
 
-    before.remove(before.size() - 1);
-    before.add(group);
+    beforeModification.remove(beforeModification.size() - 1);
+    beforeModification.add(group);
     //Transformam listele in multimi si le comparam
-    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
+    Assert.assertEquals(new HashSet<Object>(afterModification), new HashSet<Object>(beforeModification));
 
   }
 }

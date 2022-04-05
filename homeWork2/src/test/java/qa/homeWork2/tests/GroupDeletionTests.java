@@ -19,17 +19,17 @@ public class GroupDeletionTests extends TestBase {
 
     }
     //int before = app.getGroupHelper().getGroupCount();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectedGroup(before.size() - 1);//selectat ultimul element din lista
+    List<GroupData> beforeDeletion = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectedGroup(beforeDeletion.size() - 1);//selectat ultimul element din lista
     app.getGroupHelper().deleteGroup();
     app.getGroupHelper().returnGroupPage();
     //int after = app.getGroupHelper().getGroupCount();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> afterDeletion = app.getGroupHelper().getGroupList();
 
-    Assert.assertEquals(after.size(), before.size() - 1);
+    Assert.assertEquals(afterDeletion.size(), beforeDeletion.size() - 1);
 
-    before.remove(before.size() - 1);
-    Assert.assertEquals(before,after);
+    beforeDeletion.remove(beforeDeletion.size() - 1);
+    Assert.assertEquals(beforeDeletion,afterDeletion);
   }
 
 }
