@@ -16,14 +16,14 @@ public class GroupModificationTests extends TestBase {
 
     if (!app.getGroupHelper().isThereAGroup()) {
 
-      app.getGroupHelper().createGroup(new GroupData("Addnewtest44", null, null));
+      app.getGroupHelper().createGroup(new GroupData("AddnewtestGroup", null, null));
 
     }
     //int before = app.getGroupHelper().getGroupCount();
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectedGroup(before.size() - 1);
     app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size() - 1).id()/*pastram id vechi de la grua modificata*/
+    GroupData group = new GroupData(before.get(before.size() - 1).id()/*pastram id vechi de la grupa modificata*/
             ,"TestModification2", "test2modificat", "test3modificat");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
