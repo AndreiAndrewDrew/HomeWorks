@@ -4,30 +4,39 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
   @Test
-  public void testGroupModification(){
+  public void testGroupModification() {
 
     app.getNavigationHelper().gotoGroupPage();
 
-    if (! app.getGroupHelper().isThereAGroup()){
+    if (!app.getGroupHelper().isThereAGroup()) {
 
       app.getGroupHelper().createGroup(new GroupData("Addnewtest44", null, null));
 
     }
     //int before = app.getGroupHelper().getGroupCount();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectedGroup(before.size()-1);
+    app.getGroupHelper().selectedGroup(before.size() - 1);
     app.getGroupHelper().initGroupModification();
-    app.getGroupHelper().fillGroupForm(new GroupData("Addnewtest", "test2", "test3modificat"));
+    GroupData group = new GroupData(before.get(before.size() - 1).id()/*pastram id vechi de la grua modificata*/
+            ,"TestModification2", "test2modificat", "test3modificat");
+    app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnGroupPage();
     //int after = app.getGroupHelper().getGroupCount();
     List<GroupData> after = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(after.size(),before.size());
+    Assert.assertEquals(after.size(), before.size());
+
+
+    before.remove(before.size() - 1);
+    before.add(group);
+    //Transformam listele in multimi si le comparam
+    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
 
   }
 }
