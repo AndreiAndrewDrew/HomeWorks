@@ -60,10 +60,6 @@ public class GroupHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  /* metoda de enumarat elemetele selectate
-  public int getGroupCount() {
-    return driver.findElements(By.name("selected[]")).size();
-  }*/
 
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<>();
