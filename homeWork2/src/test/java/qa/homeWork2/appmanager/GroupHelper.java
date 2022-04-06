@@ -15,7 +15,7 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public void deleteGroup() {
+  public void deleteSelectedGroup() {
     clickbuton(By.name("delete"));
   }
 
@@ -49,14 +49,14 @@ public class GroupHelper extends HelperBase {
     clickbuton(By.name("update"));
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnGroupPage();
   }
 
-  public void modifyGroup(int index, GroupData group) {
+  public void modify(int index, GroupData group) {
     selectedGroup(index);
     initGroupModification();
     fillGroupForm(group);
@@ -64,12 +64,13 @@ public class GroupHelper extends HelperBase {
     returnGroupPage();
   }
 
-  public boolean isThereAGroup() {
-    return isElementPresent(By.name("selected[]"));
+  public void delete(int index) {
+    selectedGroup(index);//selectat ultimul element din lista
+    deleteSelectedGroup();
+    returnGroupPage();
   }
 
-
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<>();
     List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
