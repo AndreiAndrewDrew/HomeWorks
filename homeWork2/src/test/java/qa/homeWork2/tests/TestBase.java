@@ -1,22 +1,23 @@
 package qa.homeWork2.tests;
 
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+
+import org.testng.annotations.AfterMethod;
+
+import org.testng.annotations.BeforeMethod;
 import qa.homeWork2.appmanager.ApplicationManager;
 
 public class TestBase {
 
   protected ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
-  @BeforeClass(alwaysRun = true)
-  public void setUp() {
+  @BeforeMethod
+  public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterClass(alwaysRun = true)
+  @AfterMethod
   public void tearDown() {
     app.stop();
   }
-
 }
