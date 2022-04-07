@@ -3,8 +3,7 @@ package qa.homeWork2.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
@@ -12,17 +11,14 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
 
     app.goTo().groupPage();
-    List<GroupData> beforeCreation = app.group().list();
+    Set<GroupData> beforeCreation = app.group().all();
     GroupData group = new GroupData().withName("TestNewGroup2");
     app.group().create(group);
 
-    List<GroupData> afterCreation = app.group().list();
+    Set<GroupData> afterCreation = app.group().all();
     Assert.assertEquals(afterCreation.size(), beforeCreation.size() + 1);
+    group.withId(afterCreation.stream().mapToInt((g)->g.id()).max().getAsInt());
     beforeCreation.add(group);
-
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::id);
-    beforeCreation.sort(byId);
-    afterCreation.sort(byId);
     Assert.assertEquals(afterCreation, beforeCreation);
 
   }

@@ -4,23 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.homeWork2.model.GroupData;
-
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver driver) {
     super(driver);
-
   }
 
   public void deleteSelectedGroup() {
     clickbuton(By.name("delete"));
   }
 
-  public void selectedGroup(int index) {
-    driver.findElements(By.name("selected[]")).get(index).click();
+  private void selectedGroupById(int id) {
+    driver.findElement(By.cssSelector("input[value='"+ id +"']")).click();
   }
 
   public void returnGroupPage() {
@@ -56,22 +55,22 @@ public class GroupHelper extends HelperBase {
     returnGroupPage();
   }
 
-  public void modify(int index, GroupData group) {
-    selectedGroup(index);
+  public void modify(GroupData group) {
+    selectedGroupById(group.id());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnGroupPage();
   }
 
-  public void delete(int index) {
-    selectedGroup(index);//selectat ultimul element din lista
+  public void delete(GroupData group) {
+    selectedGroupById(group.id());
     deleteSelectedGroup();
     returnGroupPage();
   }
 
-  public List<GroupData> list() {
-    List<GroupData> groups = new ArrayList<>();
+  public Set<GroupData> all() {
+    Set<GroupData> groups = new HashSet<GroupData>();
     List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
       String name = element.getText();

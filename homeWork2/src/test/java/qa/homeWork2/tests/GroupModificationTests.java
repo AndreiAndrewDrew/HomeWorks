@@ -4,15 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().list().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("NewGroup"));
     }
   }
@@ -20,21 +19,17 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification() {
 
-    List<GroupData> beforeModification = app.group().list();
-    int index = beforeModification.size() - 1;
+    Set<GroupData> beforeModification = app.group().all();
+    GroupData modifiedGroup = beforeModification.iterator().next();
     GroupData group = new GroupData()
-            .withId(beforeModification.get(index).id()).withName("NameModification")
+            .withId(modifiedGroup.id()).withName("NameModification")
             .withHeader("HeaderModification").withFooter("FooterModification");
-    app.group().modify(index, group);
+    app.group().modify(group);
 
-    List<GroupData> afterModification = app.group().list();
+    Set<GroupData> afterModification = app.group().all();
     Assert.assertEquals(afterModification.size(), beforeModification.size());//comparam marimea listelor
-    beforeModification.remove(index);
+    beforeModification.remove(modifiedGroup);
     beforeModification.add(group);
-
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::id);//sortam listele dupa id si le comparam
-    beforeModification.sort(byId);
-    afterModification.sort(byId);
     Assert.assertEquals(afterModification, beforeModification);
   }
 }

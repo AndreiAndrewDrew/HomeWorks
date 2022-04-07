@@ -4,14 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().list().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("NewGroup"));
     }
   }
@@ -19,13 +19,13 @@ public class GroupDeletionTests extends TestBase {
   @Test
   public void testGroupDeletion() {
 
-    List<GroupData> beforeDeletion = app.group().list();
-    int index = beforeDeletion.size() - 1;
-    app.group().delete(index);
+    Set<GroupData> beforeDeletion = app.group().all();
+    GroupData deletedGroup = beforeDeletion.iterator().next();
+    app.group().delete(deletedGroup);
 
-    List<GroupData> afterDeletion = app.group().list();
+    Set<GroupData> afterDeletion = app.group().all();
     Assert.assertEquals(afterDeletion.size(), beforeDeletion.size()-1);
-    beforeDeletion.remove(index);
+    beforeDeletion.remove(deletedGroup);
     Assert.assertEquals(beforeDeletion,afterDeletion);
   }
 }
