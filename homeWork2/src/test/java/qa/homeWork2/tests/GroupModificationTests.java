@@ -27,9 +27,9 @@ public class GroupModificationTests extends TestBase {
             .withId(modifiedGroup.id()).withName("NameModification")
             .withHeader("HeaderModification").withFooter("FooterModification");
     app.group().modify(group);
-    Groups afterModification = app.group().all();
 
-    assertEquals(afterModification.size(), beforeModification.size());//comparam marimea listelor
+    assertThat(app.group().count(), equalTo(beforeModification.size()));
+    Groups afterModification = app.group().all();
     assertThat(afterModification, equalTo
             (beforeModification.without(modifiedGroup).withAdded(group)));
   }

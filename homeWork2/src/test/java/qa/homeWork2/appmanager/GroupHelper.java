@@ -88,5 +88,10 @@ public class GroupHelper extends HelperBase {
     }
     return new Groups(groupsCache);
   }
+
+  public int count() {
+    return driver.findElements(By.name("selected[]")).size();
+
+  }
 }
 
