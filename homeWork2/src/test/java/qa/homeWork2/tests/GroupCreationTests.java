@@ -1,6 +1,5 @@
 package qa.homeWork2.tests;
 
-
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 import qa.homeWork2.model.Groups;

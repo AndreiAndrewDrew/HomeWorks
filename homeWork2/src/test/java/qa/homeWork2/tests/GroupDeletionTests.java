@@ -1,15 +1,9 @@
 package qa.homeWork2.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 import qa.homeWork2.model.Groups;
-
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.*;
 import static org.testng.Assert.assertEquals;

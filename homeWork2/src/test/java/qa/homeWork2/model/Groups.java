@@ -1,7 +1,6 @@
 package qa.homeWork2.model;
 
 import com.google.common.collect.ForwardingSet;
-
 import java.util.HashSet;
 import java.util.Set;
 

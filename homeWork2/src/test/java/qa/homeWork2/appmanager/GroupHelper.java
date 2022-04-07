@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import qa.homeWork2.model.GroupData;
 import qa.homeWork2.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -16,12 +14,12 @@ public class GroupHelper extends HelperBase {
     super(driver);
   }
 
-  public void deleteSelectedGroup() {
+  public void deleteSelectedGroups() {
     clickbuton(By.name("delete"));
   }
 
   private void selectedGroupById(int id) {
-    driver.findElement(By.cssSelector("input[value='"+ id +"']")).click();
+    driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void returnGroupPage() {
@@ -54,6 +52,7 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupsCache= null;
     returnGroupPage();
   }
 
@@ -62,24 +61,32 @@ public class GroupHelper extends HelperBase {
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
+    groupsCache= null;
     returnGroupPage();
   }
 
   public void delete(GroupData group) {
     selectedGroupById(group.id());
-    deleteSelectedGroup();
+    deleteSelectedGroups();
+    groupsCache= null;
     returnGroupPage();
   }
 
+  private Groups groupsCache = null;
+
   public Groups all() {
-    Groups groups = new Groups();
+    if (groupsCache!=null) {
+      return new Groups(groupsCache);
+    }
+
+    groupsCache = new Groups();
     List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupData().withId(id).withName(name));
+      groupsCache.add(new GroupData().withId(id).withName(name));
     }
-    return groups;
+    return new Groups(groupsCache);
   }
 }
 
