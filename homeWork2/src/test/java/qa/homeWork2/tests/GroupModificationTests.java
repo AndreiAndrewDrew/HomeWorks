@@ -1,10 +1,18 @@
 package qa.homeWork2.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
+import qa.homeWork2.model.Groups;
+
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupModificationTests extends TestBase {
 
@@ -19,17 +27,16 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification() {
 
-    Set<GroupData> beforeModification = app.group().all();
+    Groups beforeModification = app.group().all();
     GroupData modifiedGroup = beforeModification.iterator().next();
     GroupData group = new GroupData()
             .withId(modifiedGroup.id()).withName("NameModification")
             .withHeader("HeaderModification").withFooter("FooterModification");
     app.group().modify(group);
+    Groups afterModification = app.group().all();
 
-    Set<GroupData> afterModification = app.group().all();
-    Assert.assertEquals(afterModification.size(), beforeModification.size());//comparam marimea listelor
-    beforeModification.remove(modifiedGroup);
-    beforeModification.add(group);
-    Assert.assertEquals(afterModification, beforeModification);
+    assertEquals(afterModification.size(), beforeModification.size());//comparam marimea listelor
+    assertThat(afterModification, equalTo
+            (beforeModification.without(modifiedGroup).withAdded(group)));
   }
 }

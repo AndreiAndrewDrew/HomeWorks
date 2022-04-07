@@ -1,10 +1,18 @@
 package qa.homeWork2.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
+import qa.homeWork2.model.Groups;
+
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -19,14 +27,14 @@ public class GroupDeletionTests extends TestBase {
   @Test
   public void testGroupDeletion() {
 
-    Set<GroupData> beforeDeletion = app.group().all();
+    Groups beforeDeletion = app.group().all();
     GroupData deletedGroup = beforeDeletion.iterator().next();
     app.group().delete(deletedGroup);
+    Groups afterDeletion = app.group().all();
 
-    Set<GroupData> afterDeletion = app.group().all();
-    Assert.assertEquals(afterDeletion.size(), beforeDeletion.size()-1);
-    beforeDeletion.remove(deletedGroup);
-    Assert.assertEquals(beforeDeletion,afterDeletion);
+    assertEquals(afterDeletion.size(), beforeDeletion.size()-1);
+    assertThat(afterDeletion, equalTo(beforeDeletion.without(deletedGroup)));
+
   }
 }
 

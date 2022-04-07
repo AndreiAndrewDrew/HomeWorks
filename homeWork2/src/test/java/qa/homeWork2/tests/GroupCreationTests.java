@@ -1,9 +1,11 @@
 package qa.homeWork2.tests;
 
-import org.testng.Assert;
+
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-import java.util.Set;
+import qa.homeWork2.model.Groups;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupCreationTests extends TestBase {
 
@@ -11,16 +13,14 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
 
     app.goTo().groupPage();
-    Set<GroupData> beforeCreation = app.group().all();
+    Groups beforeCreation = app.group().all();
     GroupData group = new GroupData().withName("TestNewGroup2");
     app.group().create(group);
+    Groups afterCreation = app.group().all();
 
-    Set<GroupData> afterCreation = app.group().all();
-    Assert.assertEquals(afterCreation.size(), beforeCreation.size() + 1);
-    group.withId(afterCreation.stream().mapToInt((g)->g.id()).max().getAsInt());
-    beforeCreation.add(group);
-    Assert.assertEquals(afterCreation, beforeCreation);
-
+    assertThat(afterCreation.size(), equalTo(beforeCreation.size() + 1));
+    assertThat(afterCreation, equalTo
+            (beforeCreation.withAdded(group.withId(afterCreation.stream().mapToInt((g)->g.id()).max().getAsInt()))));
   }
 }
 
