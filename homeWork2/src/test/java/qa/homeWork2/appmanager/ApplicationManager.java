@@ -59,15 +59,13 @@ public class ApplicationManager {
     }
   }
 
-  public GroupHelper group() {
-    return groupHelper;
-  }
+  public GroupHelper groupHelper() {return groupHelper;}
 
   public NavigationHelper goTo() {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper(){
+  public ContactHelper contactHelper(){
     return contactHelper;
   }
 
