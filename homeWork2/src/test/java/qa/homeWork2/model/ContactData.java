@@ -7,6 +7,9 @@ public final class ContactData {
   private int id=Integer.MAX_VALUE;
   private String firstname;
   private String lastname;
+  private String address;
+  private String email;
+  private String allPhone;
 
 
   public ContactData withId(int id) {
@@ -24,30 +27,59 @@ public final class ContactData {
     return this;
   }
 
-  public int id() {return id;}
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
 
-  public String firstname() {return firstname;}
-
-  public String lastname() {return lastname;}
-
+  public ContactData withAllPhone(String allPhone) {
+    this.allPhone = allPhone;
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname);
+    return id == that.id && Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) &&
+            Objects.equals(email, that.email) && Objects.equals(allPhone, that.allPhone);
   }
 
   @Override
-  public int hashCode() {return Objects.hash(id, firstname);}
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastname, address, email, allPhone);
+  }
 
   @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
             ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", email='" + email + '\'' +
+            ", allPhone='" + allPhone + '\'' +
             '}';
   }
+
+
+  public int id() {return id;}
+
+  public String firstname() {return firstname;}
+
+  public String lastname() {return lastname;}
+
+  public String address() {return address;}
+
+  public String email() {return email;}
+
+  public String allPhone() {return allPhone;}
+
 
 }

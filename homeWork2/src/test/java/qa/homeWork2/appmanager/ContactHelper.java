@@ -22,6 +22,9 @@ public class ContactHelper extends HelperBase {
   public void fillContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.firstname());
     type(By.name("lastname"), contactData.lastname());
+    type(By.name("address"), contactData.address());
+    type(By.name("email"), contactData.email());
+    type(By.name("home"), contactData.allPhone());
   }
 
   public void submitContactCreation() {
@@ -33,7 +36,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectedContactById(int id) {
-    driver.findElement(By.xpath("//*[@id=\"" + id + "\"]")).click();
+    driver.findElement(By.cssSelector("input[id='"+ id +"']")).click();
+
   }
 
   public void deleteSelectedContacts() {
@@ -68,19 +72,25 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]"));
     for (WebElement element : elements) {
       for (int i = 0; i < elements.size(); i++) {
-        String firstname = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[3]")).getText();
+
         int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-        contactsCache.add(new ContactData().withId(id).withFirstname(firstname));
+
+        String lastname = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[2]")).getText();
+        String firstname = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[3]")).getText();
+        String address = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[4]")).getText();
+        String email = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[5]")).getText();
+        String alPhone = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]/td[6]")).getText();
+
+        contactsCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address)
+                                            .withEmail(email).withAllPhone(alPhone));
       }
     }
     return new Contacts(contactsCache);
   }
 
   public int count() {
-    return driver.findElements(By.name("selected[]")).size();
+   return driver.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[@name=\"entry\"]")).size();
   }
-
-
 }
 
 
