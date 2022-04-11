@@ -4,23 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.homeWork2.model.GroupData;
+import qa.homeWork2.model.Groups;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver driver) {
     super(driver);
-
   }
 
-  public void deleteGroup() {
+  public void deleteSelectedGroups() {
     clickbuton(By.name("delete"));
   }
 
-  public void selectedGroup(int index) {
-    driver.findElements(By.name("selected[]")).get(index).click();
+  private void selectedGroupById(int id) {
+    driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void returnGroupPage() {
@@ -49,32 +48,50 @@ public class GroupHelper extends HelperBase {
     clickbuton(By.name("update"));
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupsCache= null;
     returnGroupPage();
   }
 
-  public boolean isThereAGroup() {
-    return isElementPresent(By.name("selected[]"));
+  public void modify(GroupData group) {
+    selectedGroupById(group.id());
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    groupsCache= null;
+    returnGroupPage();
   }
 
-  /* metoda de enumarat elemetele selectate
-  public int getGroupCount() {
-    return driver.findElements(By.name("selected[]")).size();
-  }*/
+  public void delete(GroupData group) {
+    selectedGroupById(group.id());
+    deleteSelectedGroups();
+    groupsCache= null;
+    returnGroupPage();
+  }
 
-  public List<GroupData> getGroupList() {
-    List<GroupData> groups = new ArrayList<>();
-    List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
-    for (WebElement element: elements){
-      String name = element.getText();
-      int id =Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id, name, null, null);
-      groups.add(group);
+  private Groups groupsCache = null;
+
+  public Groups all() {
+    if (groupsCache!=null) {
+      return new Groups(groupsCache);
     }
-    return groups;
+
+    groupsCache = new Groups();
+    List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groupsCache.add(new GroupData().withId(id).withName(name));
+    }
+    return new Groups(groupsCache);
+  }
+
+  public int count() {
+    return driver.findElements(By.name("selected[]")).size();
+
   }
 }
 

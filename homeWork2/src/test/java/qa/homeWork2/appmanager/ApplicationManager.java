@@ -38,7 +38,7 @@ public class ApplicationManager {
       driver = new EdgeDriver();
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/");
 
     groupHelper = new GroupHelper(driver);
@@ -59,15 +59,13 @@ public class ApplicationManager {
     }
   }
 
-  public GroupHelper getGroupHelper() {
-    return groupHelper;
-  }
+  public GroupHelper groupHelper() {return groupHelper;}
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper(){
+  public ContactHelper contactHelper(){
     return contactHelper;
   }
 

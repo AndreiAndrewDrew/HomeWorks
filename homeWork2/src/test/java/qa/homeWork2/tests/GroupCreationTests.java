@@ -1,35 +1,38 @@
 package qa.homeWork2.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import qa.homeWork2.model.Groups;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    //Create new group
-    app.getNavigationHelper().gotoGroupPage();
-    //int before = app.getGroupHelper().getGroupCount();
-    List<GroupData> beforeCreation = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("TestNewGroup2", null, null);
-    app.getGroupHelper().createGroup(group);
-    //int after = app.getGroupHelper().getGroupCount();
-    List<GroupData> afterCreation = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(afterCreation.size(), beforeCreation.size() + 1);
 
-    //group.setId(afterCreation.stream().max(Comparator.comparingInt(GroupData::id)).get().id());
+    app.goTo().groupPage();
+    Groups beforeCreation = app.groupHelper().all();
+    GroupData group = new GroupData().withName("TestNewGroup2");
+    app.groupHelper().create(group);
 
-    beforeCreation.add(group);
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::id);
-    beforeCreation.sort(byId);
-    afterCreation.sort(byId);
-    Assert.assertEquals(new HashSet<Object>(afterCreation), new HashSet<Object>(beforeCreation));
+    assertThat(app.groupHelper().count(), equalTo(beforeCreation.size() + 1));
+    Groups afterCreation = app.groupHelper().all();
+    assertThat(afterCreation, equalTo
+            (beforeCreation.withAdded(group.withId(afterCreation.stream().mapToInt((g)->g.id()).max().getAsInt()))));
+  }
 
+  @Test
+  public void testBadGroupCreation() {
+
+    app.goTo().groupPage();
+    Groups beforeCreation = app.groupHelper().all();
+    GroupData group = new GroupData().withName("TestNewGroup2'@@$@");
+    app.groupHelper().create(group);
+
+    assertThat(app.groupHelper().count(), equalTo(beforeCreation.size()));
+    Groups afterCreation = app.groupHelper().all();
+    assertThat(afterCreation, equalTo(beforeCreation));
   }
 }
 
