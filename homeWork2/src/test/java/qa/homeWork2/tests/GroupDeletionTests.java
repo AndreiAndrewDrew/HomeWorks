@@ -1,34 +1,35 @@
 package qa.homeWork2.tests;
 
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
-
-import java.util.List;
+import qa.homeWork2.model.Groups;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
 
-  @Test //inceput de test
-  public void testGroupDeletion() {
-    //Delete group
-    app.getNavigationHelper().gotoGroupPage();
-
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Addnewtest44", null, null));
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.groupHelper().all().size() == 0) {
+      app.groupHelper().create(new GroupData().withName("NewGroup"));
     }
-    //int before = app.getGroupHelper().getGroupCount();
-    List<GroupData> beforeDeletion = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectedGroup(beforeDeletion.size() - 1);//selectat ultimul element din lista
-    app.getGroupHelper().deleteGroup();
-    app.getGroupHelper().returnGroupPage();
-    //int after = app.getGroupHelper().getGroupCount();
-    List<GroupData> afterDeletion = app.getGroupHelper().getGroupList();
-
-    Assert.assertEquals(afterDeletion.size(), beforeDeletion.size() - 1);
-    beforeDeletion.remove(beforeDeletion.size() - 1);
-    Assert.assertEquals(beforeDeletion,afterDeletion);
   }
 
+  @Test
+  public void testGroupDeletion() {
+
+    Groups beforeDeletion = app.groupHelper().all();
+    GroupData deletedGroup = beforeDeletion.iterator().next();
+    app.groupHelper().delete(deletedGroup);
+
+    assertThat(app.groupHelper().count(), equalTo(beforeDeletion.size()-1));
+    Groups afterDeletion = app.groupHelper().all();
+    assertThat(afterDeletion, equalTo(beforeDeletion.without(deletedGroup)));
+
+  }
 }
 
 
