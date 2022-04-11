@@ -14,10 +14,12 @@ public class ContactPhoneTests extends TestBase {
     ContactData contact = app.contactHelper().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contactHelper().infoFromEditForm(contact);
 
-    assertThat(contact.homePhone(), equalTo(contactInfoFromEditForm.homePhone()));
-    assertThat(contact.mobilePhpne(), equalTo(contactInfoFromEditForm.mobilePhpne()));
-    assertThat(contact.workPhone(), equalTo(contactInfoFromEditForm.workPhone()));
+    assertThat(contact.homePhone(), equalTo(cleaned(contactInfoFromEditForm.homePhone())));
+    assertThat(contact.mobilePhpne(), equalTo(cleaned(contactInfoFromEditForm.mobilePhpne())));
+    assertThat(contact.workPhone(), equalTo(cleaned(contactInfoFromEditForm.workPhone())));
   }
 
-
+  public String cleaned (String phone){
+    return phone.replaceAll("\\s","").replaceAll("[-()]","");
+  }
 }
