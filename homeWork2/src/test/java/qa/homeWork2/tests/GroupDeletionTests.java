@@ -6,7 +6,6 @@ import qa.homeWork2.model.GroupData;
 import qa.homeWork2.model.Groups;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.*;
-import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -28,7 +27,6 @@ public class GroupDeletionTests extends TestBase {
     assertThat(app.groupHelper().count(), equalTo(beforeDeletion.size()-1));
     Groups afterDeletion = app.groupHelper().all();
     assertThat(afterDeletion, equalTo(beforeDeletion.without(deletedGroup)));
-
   }
 }
 
