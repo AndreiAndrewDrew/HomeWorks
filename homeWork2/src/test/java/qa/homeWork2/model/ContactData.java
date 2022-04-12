@@ -1,5 +1,6 @@
 package qa.homeWork2.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public final class ContactData {
@@ -13,6 +14,17 @@ public final class ContactData {
   private String mobilePhone;
   private String workPhone;
   private String allPhones;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
+
+  private File photo;
 
   public ContactData withId(int id) {
     this.id = id;
