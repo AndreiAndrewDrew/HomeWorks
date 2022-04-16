@@ -6,10 +6,8 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import qa.homeWork2.model.GroupData;
-import qa.homeWork2.model.Groups;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +40,9 @@ public class GroupDataGenerator {
     List<GroupData> groups = generateGroups(count);
     if (format.equals("csv")) {
       saveAsCsv(groups, new File(file));
-    } else if (format.equals("json")){
+    } else if (format.equals("json")) {
       saveAsJson(groups, new File(file));
-    }else {
+    } else {
       System.out.println("Unrecognized format" + format);
     }
 
@@ -53,19 +51,19 @@ public class GroupDataGenerator {
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(groups);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
-    Writer writer = new FileWriter(file);
-    for (GroupData group : groups) {
-      writer.write(String.format("%s; %s; %s\n", group.name(), group.header(),
-              group.footer()));
+    try (Writer writer = new FileWriter(file)) {
+      for (GroupData group : groups) {
+        writer.write(String.format("%s; %s; %s\n", group.name(), group.header(),
+                group.footer()));
+      }
     }
-    writer.close();
   }
 
   private List<GroupData> generateGroups(int count) {

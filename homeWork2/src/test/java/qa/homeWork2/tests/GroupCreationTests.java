@@ -19,18 +19,20 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader
-            ("src/test/resources/groups.json"));
-    StringBuilder json = new StringBuilder();
-    String line = reader.readLine();
-    while (line != null) {
-      json.append(line);
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader
+            ("src/test/resources/groups.json"))) {
+      StringBuilder json = new StringBuilder();
+      String line = reader.readLine();
+      while (line != null) {
+        json.append(line);
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() {
+      }
+              .getType()); //List<GroupData>.class
+      return groups.stream().map((g) -> new Object[]{g}).toList().iterator();
     }
-    Gson gson = new Gson();
-    List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() {}
-            .getType()); //List<GroupData>.class
-    return groups.stream().map((g) -> new Object[]{g}).toList().iterator();
   }
 
   @Test(dataProvider = "validGroupsFromJson")
