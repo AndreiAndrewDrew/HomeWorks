@@ -1,14 +1,16 @@
 package qa.homeWork2.tests;
 
+import com.google.gson.Gson;
+import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
 import qa.homeWork2.model.Groups;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.*;
@@ -16,21 +18,22 @@ import static org.hamcrest.MatcherAssert.*;
 public class GroupCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validGroups() throws IOException {
-    List<Object[]> list = new ArrayList<Object[]>();
+  public Iterator<Object[]> validGroupsFromJson() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader
-            ("src/test/resources/groups.csv"));
+            ("src/test/resources/groups.json"));
+    StringBuilder json = new StringBuilder();
     String line = reader.readLine();
-    while (line != null){
-      String[] split = line.split(";");
-      list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1])
-              .withFooter(split[2])});
+    while (line != null) {
+      json.append(line);
       line = reader.readLine();
     }
-    return list.iterator();
+    Gson gson = new Gson();
+    List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() {}
+            .getType()); //List<GroupData>.class
+    return groups.stream().map((g) -> new Object[]{g}).toList().iterator();
   }
 
-  @Test(dataProvider = "validGroups")
+  @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups beforeCreation = app.groupHelper().all();
@@ -39,17 +42,16 @@ public class GroupCreationTests extends TestBase {
     Groups afterCreation = app.groupHelper().all();
     assertThat(afterCreation, equalTo
             (beforeCreation.withAdded(group.withId(afterCreation.stream()
-                    .mapToInt((g)->g.id()).max().getAsInt()))));
+                    .mapToInt(GroupData::id).max().getAsInt()))));
   }
 
-  @Test (enabled = false)
+  @Test(enabled = false)
   public void testBadGroupCreation() {
 
     app.goTo().groupPage();
     Groups beforeCreation = app.groupHelper().all();
     GroupData group = new GroupData().withName("TestNewGroup2'@@$@");
     app.groupHelper().create(group);
-
     assertThat(app.groupHelper().count(), equalTo(beforeCreation.size()));
     Groups afterCreation = app.groupHelper().all();
     assertThat(afterCreation, equalTo(beforeCreation));
