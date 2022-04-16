@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="3" total="5" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-04-16T22:12:10 EEST" name="Suite1" finished-at="2022-04-16T22:12:16 EEST" duration-ms="6251">
+    <groups>
+    </groups>
+    <test started-at="2022-04-16T22:12:10 EEST" name="Contacts" finished-at="2022-04-16T22:12:16 EEST" duration-ms="6251">
+      <class name="qa.homeWork2.tests.ContactCreationTests">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-16T22:12:05 EEST" name="setUp" finished-at="2022-04-16T22:12:10 EEST" duration-ms="4614" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testContactCreation()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-16T22:12:10 EEST" name="testContactCreation" finished-at="2022-04-16T22:12:12 EEST" duration-ms="2562" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testContactCreation -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-16T22:12:16 EEST" name="tearDown" finished-at="2022-04-16T22:12:16 EEST" duration-ms="373" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- qa.homeWork2.tests.ContactCreationTests -->
+      <class name="qa.homeWork2.tests.ContactDeletionTests">
+        <test-method is-config="true" signature="ensurePreconditions()[pri:0, instance:qa.homeWork2.tests.ContactDeletionTests@47af7f3d]" started-at="2022-04-16T22:12:12 EEST" name="ensurePreconditions" finished-at="2022-04-16T22:12:12 EEST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ensurePreconditions -->
+        <test-method signature="testContactDeletion()[pri:0, instance:qa.homeWork2.tests.ContactDeletionTests@47af7f3d]" started-at="2022-04-16T22:12:12 EEST" name="testContactDeletion" finished-at="2022-04-16T22:12:16 EEST" duration-ms="3613" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testContactDeletion -->
+      </class> <!-- qa.homeWork2.tests.ContactDeletionTests -->
+    </test> <!-- Contacts -->
+  </suite> <!-- Suite1 -->
+</testng-results>
