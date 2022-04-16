@@ -1,0 +1,27 @@
+[
+  {
+    "name": "TestNewGroupName 0",
+    "header": "TestHeader 0",
+    "footer": "TestFooter 0"
+  },
+  {
+    "name": "TestNewGroupName 1",
+    "header": "TestHeader 1",
+    "footer": "TestFooter 1"
+  },
+  {
+    "name": "TestNewGroupName 2",
+    "header": "TestHeader 2",
+    "footer": "TestFooter 2"
+  },
+  {
+    "name": "TestNewGroupName 3",
+    "header": "TestHeader 3",
+    "footer": "TestFooter 3"
+  },
+  {
+    "name": "TestNewGroupName 4",
+    "header": "TestHeader 4",
+    "footer": "TestFooter 4"
+  }
+]
