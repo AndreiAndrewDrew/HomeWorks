@@ -90,6 +90,7 @@
               <suiteXmlFiles>
                 <suiteXmlFile>src/test/resources/testng-groups.xml</suiteXmlFile>
               </suiteXmlFiles>
+
             </configuration>
           </plugin>
         </plugins>
