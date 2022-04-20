@@ -2,6 +2,8 @@ package qa.homeWork2.tests;
 
 import com.google.gson.Gson;
 import org.openqa.selenium.json.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.GroupData;
@@ -45,6 +47,7 @@ public class GroupCreationTests extends TestBase {
     assertThat(afterCreation, equalTo
             (beforeCreation.withAdded(group.withId(afterCreation.stream()
                     .mapToInt(GroupData::id).max().getAsInt()))));
+
   }
 
   @Test(enabled = false)

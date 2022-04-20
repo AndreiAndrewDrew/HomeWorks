@@ -1,9 +1,11 @@
 For run in CMD for test-groups.xml, and test-contacts.xml
 
-For test-contacts.xml> mvn clean test -PtestContacts -Dbrowser=firefox 
+For test-contacts.xml >mvn clean test -PtestContacts -Dbrowser=firefox 
 
-For test-groups.xml> mvn clean test -PtestContacts -Dbrowser=firefox
+For test-groups.xml >mvn clean test -PtestContacts -Dbrowser=firefox
 
-If run> mvn clean test -PtestContacts 
+If run >mvn clean test -PtestContacts 
 then run tests in chrome browser...default value!
+
+run with local.propreties >mvn clean test -PtestContacts -Dtarget=local
 

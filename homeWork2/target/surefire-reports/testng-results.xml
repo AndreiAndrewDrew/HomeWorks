@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="3" total="5" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-04-18T14:39:38 EEST" name="Suite1" finished-at="2022-04-18T14:40:00 EEST" duration-ms="21575">
+  <suite started-at="2022-04-20T09:50:34 EEST" name="qa.homeWork2.tests.TestBase" finished-at="2022-04-20T09:50:34 EEST" duration-ms="58">
     <groups>
     </groups>
-    <test started-at="2022-04-18T14:39:38 EEST" name="Contacts" finished-at="2022-04-18T14:40:00 EEST" duration-ms="21575">
-      <class name="qa.homeWork2.tests.ContactCreationTests">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-18T14:39:10 EEST" name="setUp" finished-at="2022-04-18T14:39:38 EEST" duration-ms="28055" status="PASS">
+    <test started-at="2022-04-20T09:50:34 EEST" name="Command line test" finished-at="2022-04-20T09:50:34 EEST" duration-ms="58">
+      <class name="qa.homeWork2.tests.TestBase">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:qa.homeWork2.tests.TestBase@568bf312]" started-at="2022-04-20T09:50:15 EEST" name="setUp" finished-at="2022-04-20T09:50:34 EEST" duration-ms="18998" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testContactCreation()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-18T14:39:38 EEST" name="testContactCreation" finished-at="2022-04-18T14:39:51 EEST" duration-ms="12870" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testContactCreation -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:qa.homeWork2.tests.ContactCreationTests@5e0826e7]" started-at="2022-04-18T14:40:00 EEST" name="tearDown" finished-at="2022-04-18T14:40:03 EEST" duration-ms="3475" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:qa.homeWork2.tests.TestBase@568bf312]" started-at="2022-04-20T09:50:34 EEST" name="tearDown" finished-at="2022-04-20T09:50:37 EEST" duration-ms="2582" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- qa.homeWork2.tests.ContactCreationTests -->
-      <class name="qa.homeWork2.tests.ContactDeletionTests">
-        <test-method is-config="true" signature="ensurePreconditions()[pri:0, instance:qa.homeWork2.tests.ContactDeletionTests@47af7f3d]" started-at="2022-04-18T14:39:51 EEST" name="ensurePreconditions" finished-at="2022-04-18T14:39:51 EEST" duration-ms="13" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- ensurePreconditions -->
-        <test-method signature="testContactDeletion()[pri:0, instance:qa.homeWork2.tests.ContactDeletionTests@47af7f3d]" started-at="2022-04-18T14:39:51 EEST" name="testContactDeletion" finished-at="2022-04-18T14:40:00 EEST" duration-ms="8584" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testContactDeletion -->
-      </class> <!-- qa.homeWork2.tests.ContactDeletionTests -->
-    </test> <!-- Contacts -->
-  </suite> <!-- Suite1 -->
+      </class> <!-- qa.homeWork2.tests.TestBase -->
+    </test> <!-- Command line test -->
+  </suite> <!-- qa.homeWork2.tests.TestBase -->
 </testng-results>
