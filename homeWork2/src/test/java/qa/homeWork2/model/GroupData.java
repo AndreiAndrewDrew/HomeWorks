@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class GroupData {
 
-  private int id = Integer.MAX_VALUE;
+  private int id= Integer.MAX_VALUE;
   @Expose
   private  String name;
   @Expose
@@ -67,7 +67,7 @@ public class GroupData {
   @Override
   public String toString() {
     return "GroupData{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", name='" + name + '\'' +
             '}';
   }
