@@ -1,18 +1,32 @@
 package qa.homeWork2.model;
 
 import com.google.gson.annotations.Expose;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.Type;
 
 import java.util.Objects;
 
-
+@Entity
+@Table (name = "group_list")
 public class GroupData {
 
+  @Id
+  @Column (name = "group_id")
   private int id= Integer.MAX_VALUE;
+
   @Expose
+  @Column (name = "group_name")
   private  String name;
+
   @Expose
+  @Column (name = "group_header")
   private  String header;
+
   @Expose
+  @Column (name = "group_footer")
   private  String footer;
 
   public GroupData withId(int id) {
