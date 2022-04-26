@@ -1,30 +1,52 @@
 package qa.homeWork2.model;
 
+import jakarta.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public final class ContactData {
 
-  private int id=Integer.MAX_VALUE;
+  @Id
+  @Column(name = "id")
+  private int id = Integer.MAX_VALUE;
+
+  @Column(name = "firstname")
   private String firstname;
+
+  @Column(name = "lastname")
   private String lastname;
+
+  @Column(name = "address")
   private String address;
+
+  @Column(name = "email")
   private String email;
+
+  @Column(name = "home")
   private String homePhone;
+
+  @Column(name = "mobile")
   private String mobilePhone;
+
+  @Column(name = "work")
   private String workPhone;
+
+  @Transient
   private String allPhones;
 
+  @Column(name = "photo")
+  private String photo;
+
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
-
-  private File photo;
 
   public ContactData withId(int id) {
     this.id = id;
@@ -45,6 +67,7 @@ public final class ContactData {
     this.address = address;
     return this;
   }
+
   public ContactData withEmail(String email) {
     this.email = email;
     return this;
@@ -71,23 +94,41 @@ public final class ContactData {
   }
 
 
-  public int id() {return id;}
+  public int id() {
+    return id;
+  }
 
-  public String firstname() {return firstname;}
+  public String firstname() {
+    return firstname;
+  }
 
-  public String lastname() {return lastname;}
+  public String lastname() {
+    return lastname;
+  }
 
-  public String address() {return address;}
+  public String address() {
+    return address;
+  }
 
-  public String email() {return email;}
+  public String email() {
+    return email;
+  }
 
-  public String homePhone() {return homePhone;}
+  public String homePhone() {
+    return homePhone;
+  }
 
-  public String mobilePhpne() {return mobilePhone;}
+  public String mobilePhpne() {
+    return mobilePhone;
+  }
 
-  public String workPhone() {return workPhone;}
+  public String workPhone() {
+    return workPhone;
+  }
 
-  public String allPhones() {return allPhones;}
+  public String allPhones() {
+    return allPhones;
+  }
 
   @Override
   public boolean equals(Object o) {

@@ -29,6 +29,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private ContactHelper contactHelper;
   private final String browser;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -39,6 +40,9 @@ public class ApplicationManager {
     String target = System.getProperty("target","local");
     properties.load(new FileReader(new File(String
             .format("src/test/resources/%s.properties",target))));
+
+    dbHelper = new DbHelper();
+
     //cream conditie de alegere a browserului
     switch (browser) {
       case BrowserType.FIREFOX -> driver = new FirefoxDriver();
@@ -56,6 +60,8 @@ public class ApplicationManager {
 
     sessionHelper.login(properties.getProperty("web.adminLogin")
             , properties.getProperty("web.adminPassword"));
+
+
   }
 
   public void stop() {
@@ -78,5 +84,6 @@ public class ApplicationManager {
     return contactHelper;
   }
 
+  public DbHelper db() {return dbHelper;}
 
 }

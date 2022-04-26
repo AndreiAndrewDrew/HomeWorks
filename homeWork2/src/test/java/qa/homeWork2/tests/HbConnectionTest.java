@@ -7,7 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import qa.homeWork2.model.GroupData;
+
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class HbConnectionTest {
   private SessionFactory sessionFactory;
 
   @BeforeClass
-  protected void setUp() throws Exception {
+  protected void setUp() {
     // A SessionFactory is set up once for an application!
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure() // configures settings from hibernate.cfg.xml
@@ -35,9 +35,10 @@ public class HbConnectionTest {
   public void testHbConnection() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<GroupData> result = session.createQuery("from GroupData").list();
-    for (GroupData group : result) {
-      System.out.println(group);
+    List result =
+            session.createQuery("from ContactData").list();
+    for (Object contact : result) {
+      System.out.println(contact);
     }
     session.getTransaction().commit();
     session.close();
