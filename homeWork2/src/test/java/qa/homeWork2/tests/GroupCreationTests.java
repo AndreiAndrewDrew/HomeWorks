@@ -54,11 +54,11 @@ public class GroupCreationTests extends TestBase {
   public void testBadGroupCreation() {
 
     app.goTo().groupPage();
-    Groups beforeCreation = app.groupHelper().all();
+    Groups beforeCreation = app.db().groups();
     GroupData group = new GroupData().withName("TestNewGroup2'@@$@");
     app.groupHelper().create(group);
     assertThat(app.groupHelper().count(), equalTo(beforeCreation.size()));
-    Groups afterCreation = app.groupHelper().all();
+    Groups afterCreation = app.db().groups();
     assertThat(afterCreation, equalTo(beforeCreation));
   }
 }
