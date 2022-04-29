@@ -1,8 +1,11 @@
 package qa.homeWork2.model;
 
 import jakarta.persistence.*;
+
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -38,6 +41,7 @@ public final class ContactData {
 
   @Column(name = "photo")
   private String photo;
+
 
   public File getPhoto() {
     return new File(photo);
@@ -92,7 +96,6 @@ public final class ContactData {
     this.allPhones = allPhones;
     return this;
   }
-
 
   public int id() {
     return id;

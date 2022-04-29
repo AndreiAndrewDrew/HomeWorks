@@ -7,8 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="homeWork2" />
+        <module name="mantis-tests" />
         <module name="homeWork1" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="homeWork2 (1)" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

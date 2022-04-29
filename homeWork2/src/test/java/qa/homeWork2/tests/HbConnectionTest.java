@@ -41,6 +41,7 @@ public class HbConnectionTest {
       System.out.println(contact);
     }
     session.getTransaction().commit();
+
     session.close();
   }
 }

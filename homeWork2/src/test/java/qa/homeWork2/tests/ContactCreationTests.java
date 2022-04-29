@@ -4,6 +4,7 @@ import org.openqa.selenium.devtools.v85.dom.model.ShapeOutsideInfo;
 import org.testng.annotations.Test;
 import qa.homeWork2.model.ContactData;
 import qa.homeWork2.model.Contacts;
+import qa.homeWork2.model.Groups;
 
 import java.io.File;
 

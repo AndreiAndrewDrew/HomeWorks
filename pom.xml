@@ -11,6 +11,7 @@
   <modules>
     <module>homeWork1</module>
     <module>homeWork2</module>
+    <module>mantis-tests</module>
   </modules>
 
   <properties>
